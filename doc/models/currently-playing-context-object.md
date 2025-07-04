@@ -1,0 +1,66 @@
+
+# Currently Playing Context Object
+
+*This model accepts additional fields of type Any.*
+
+## Structure
+
+`CurrentlyPlayingContextObject`
+
+## Fields
+
+| Name | Type | Tags | Description |
+|  --- | --- | --- | --- |
+| `device` | [`DeviceObject`](../../doc/models/device-object.md) | Optional | The device that is currently active. |
+| `repeat_state` | `str` | Optional | off, track, context |
+| `shuffle_state` | `bool` | Optional | If shuffle is on or off. |
+| `context` | [`ContextObject`](../../doc/models/context-object.md) | Optional | A Context Object. Can be `null`. |
+| `timestamp` | `int` | Optional | Unix Millisecond Timestamp when data was fetched. |
+| `progress_ms` | `int` | Optional | Progress into the currently playing track or episode. Can be `null`. |
+| `is_playing` | `bool` | Optional | If something is currently playing, return `true`. |
+| `item` | [TrackObject](../../doc/models/track-object.md) \| [EpisodeObject](../../doc/models/episode-object.md) \| None | Optional | This is a container for one-of cases. |
+| `currently_playing_type` | `str` | Optional | The object type of the currently playing item. Can be one of `track`, `episode`, `ad` or `unknown`. |
+| `actions` | [`DisallowsObject`](../../doc/models/disallows-object.md) | Optional | Allows to update the user interface based on which playback actions are available within the current context. |
+| `additional_properties` | `Dict[str, Any]` | Optional | - |
+
+## Example (as JSON)
+
+```json
+{
+  "device": {
+    "id": "id6",
+    "is_active": false,
+    "is_private_session": false,
+    "is_restricted": false,
+    "name": "name6",
+    "exampleAdditionalProperty": {
+      "key1": "val1",
+      "key2": "val2"
+    }
+  },
+  "repeat_state": "repeat_state6",
+  "shuffle_state": false,
+  "context": {
+    "type": "type8",
+    "href": "href4",
+    "external_urls": {
+      "spotify": "spotify6",
+      "exampleAdditionalProperty": {
+        "key1": "val1",
+        "key2": "val2"
+      }
+    },
+    "uri": "uri6",
+    "exampleAdditionalProperty": {
+      "key1": "val1",
+      "key2": "val2"
+    }
+  },
+  "timestamp": 48,
+  "exampleAdditionalProperty": {
+    "key1": "val1",
+    "key2": "val2"
+  }
+}
+```
+
