@@ -3,8 +3,8 @@ name: PR Workflow
 on:
   pull_request:
     branches:
-      - main  # Make sure your default branch is 'main'
-  workflow_dispatch:  # This allows manual run
+      - main
+  workflow_dispatch:
 
 jobs:
   sdk-check:
@@ -35,7 +35,7 @@ jobs:
           fi
 
   code-quality:
-    name: Code Quality Check
+    name: Code Quality Check and Batch Update
     runs-on: ubuntu-latest
     needs: sdk-check
 
@@ -48,8 +48,12 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install flake8
-        run: pip install flake8
+      - name: Install flake8 and black
+        run: |
+          pip install flake8 black
 
-      - name: Run Code Quality Batch
-        run: flake8 .  # Replace '.' with your folder if needed
+      - name: Run Code Quality Check (flake8)
+        run: flake8 .
+
+      - name: Run Code Batch Formatter (black)
+        run: black --check .  # or just `black .` to auto-format
