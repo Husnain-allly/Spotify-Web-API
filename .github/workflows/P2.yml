@@ -18,16 +18,24 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'  # Set a specific version instead of matrix
+          python-version: '3.10'  # or whichever version your SDK supports
 
-      - name: Install Python dependencies
+      - name: Install SDK dependencies
         run: pip install -r requirements.txt
 
-      - name: Install test requirements
-        run: pip install -r test-requirements.txt
+      - name: Install test tools (pytest)
+        run: pip install pytest
 
-      - name: Run tests
-        run: pytest  # Replace with your test runner, e.g., `python -m unittest discover`
+      - name: (Optional) Build SDK
+        run: |
+          if [ -f setup.py ]; then
+            python setup.py sdist bdist_wheel
+          else
+            echo "No setup.py found — skipping build step."
+          fi
+
+      - name: Run SDK tests
+        run: pytest
 
   code-quality:
     name: Code Quality Check
