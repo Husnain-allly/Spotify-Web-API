@@ -4,7 +4,7 @@ on:
   pull_request:
     branches:
       - main  # Or whatever your main branch is
-
+  workflow_dispatch:  # This allows you to manually run it from the Actions tab
 jobs:
   sdk-check:
     name: SDK Build and Test
